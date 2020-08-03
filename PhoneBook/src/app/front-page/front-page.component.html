@@ -1,0 +1,113 @@
+<div class="container">
+   
+    <div class="control-group">
+        
+          <div class="input-prepend">
+            <span class="add-on"><i style="font-size:24px" class="fa">&#xf2b9;</i></span>
+            &nbsp;
+            <label class="control-label" for="inputIcon">Phone Book App</label>
+          </div>       
+      </div>
+
+    <br/>
+
+<!-- Add button -->
+    <div class="left">
+        <label style="margin-right: 0px;">Contacts
+        
+            <button class="btn btn-primary" style="margin-left: 300px;" (click)="show()">+ Add Contacts</button>
+        
+    </label>  
+    </div>
+
+<!-- Pop up form with validation -->
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Register</h4>
+        </div>
+        <div class="modal-body">
+                  <form [formGroup]="myForm">
+                    <div class="form-group">
+                        <label>FirstName</label>
+                        <input type="text" formControlName="Fname1" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Fname1.errors }" />
+                        <div *ngIf="submitted && f.Fname1.errors" class="invalid-feedback">
+                              <div *ngIf="f.Fname1.errors.required">FirstName is required</div>
+                        </div>
+                     </div>
+<div class="form-group">
+                     <label>Last Name</label>
+                     <input type="text" formControlName="Fname2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Fname2.errors }" />
+                     <div *ngIf="submitted && f.Fname2.errors" class="invalid-feedback">
+                        <div *ngIf="f.Fname2.errors.required">Last Name is required</div>
+                     </div>
+                    </div>
+<div class="form-group">
+                        <label>Mobile</label>
+                        <input type="text" formControlName="Number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Number.errors }" />
+                        <div *ngIf="submitted && f.Number.errors" class="invalid-feedback">
+                           <div *ngIf="f.Number.errors">Mobile must be Valid and at least 10 digits</div>
+                          
+                        </div>
+                        </div>
+                      <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid" (click)="onSubmit()">Submit</button><button type="reset" class="btn btn-danger" (click)="hide()">Cancel</button>
+                   </form>  
+                  
+            </div>
+        </div>
+    </div>
+</div>
+       
+ 
+<br/>
+
+<!-- search bar -->
+  
+    <div class="md-form mt-0">
+     <ul class="nav nav-pills">
+      <li class="nav-item">
+        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search contact by name" mdbInput [(ngModel)]="searchKey"  style="width: max-content;">
+        </li>
+          <li class="nav-item">
+            <span><button (click)="OnSearch()"><i class='glyphicon glyphicon-search' style='font-size:14px'></i></button></span>
+          </li>
+          <li class="nav-item">
+             <span><button (click)="onClose1()" *ngIf="searchKey"><i class="fa fa-close"></i></button></span>
+            </li>  
+             <li><button (click)="ByNameAesc()" class="dropdown-item">By Name Aesc</button></li>
+             <li> <button (click)="ByNameDesc()" class="dropdown-item">By Name Desc</button></li>
+              <li>  <button (click)="ByNum()" class="dropdown-item">By Number</button></li>
+          
+        </ul>
+      </div>
+
+        
+  
+<br/>
+<!-- Printing values -->
+
+        <!-- Display details -->
+
+
+<section class="showContact" *ngFor="let a of contacts;">
+    <div style="background-color:white;"  >
+        <div style="padding:3%;">
+            <b> {{a.fname}} {{a.lname}}</b><span><button class="btn btn-danger" style="float: right;" (click)="onDelete()"> <i class="material-icons">delete</i></button></span>
+              <button class="btn btn-success" style="float:right;" (click)="OnUpdate()"><i class="glyphicon glyphicon-edit"></i></button>
+            <h4 style="color: rgb(58, 63, 63);"><i class="glyphicon glyphicon-earphone"></i>  {{a.mobileNumber}}</h4>
+        </div>
+        <hr/>
+ </div>   
+
+</section>
+
+
+   
+
+</div>
+
+
+
+
+    
